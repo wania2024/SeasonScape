@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SeasonScape — Your Matches</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body class="results-page">
+
+  <div class="bg-scene">
+    <div class="bg-layer mountains"></div>
+    <div class="bg-layer sky-overlay"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">SeasonScape</span>
+    </div>
+    <a href="/" class="btn-secondary small">← Start Over</a>
+  </header>
+
+  <main class="results-container">
+
+    <!-- LOADING STATE -->
+    <div id="loading-state" class="loading-state">
+      <div class="loading-orb"></div>
+      <h2 class="loading-title">Analysing your preferences…</h2>
+      <p class="loading-sub">Our AI is comparing real places across Pakistan for you</p>
+      <div class="loading-steps">
+        <div class="load-step active" id="ls1">Scoring 30 locations</div>
+        <div class="load-step" id="ls2">Ranking top matches</div>
+        <div class="load-step" id="ls3">Running AI comparison</div>
+        <div class="load-step" id="ls4">Preparing your results</div>
+      </div>
+    </div>
+
+    <!-- RESULTS STATE (hidden until loaded) -->
+    <div id="results-state" style="display:none">
+
+      <!-- Greeting -->
+      <div class="results-greeting">
+        <h1 class="results-title" id="results-heading">Your Perfect Matches</h1>
+        <p class="results-sub" id="results-sub">Based on your preferences, here are your top 3 places</p>
+      </div>
+
+      <!-- User Preference Tags -->
+      <div class="pref-tags" id="pref-tags"></div>
+
+      <!-- PLACE CARDS -->
+      <div class="place-cards" id="place-cards"></div>
+
+      <!-- AI COMPARISON PANEL -->
+      <div class="ai-panel">
+        <div class="ai-panel-header">
+          <span class="ai-badge">AI Analysis</span>
+          <h3 class="ai-title">What our AI recommends</h3>
+        </div>
+        <div class="ai-body" id="ai-body">
+          <div class="ai-loading">Generating AI comparison…</div>
+        </div>
+      </div>
+
+      <!-- COMPARISON TABLE -->
+      <div class="compare-section">
+        <h3 class="compare-title">Side-by-side comparison</h3>
+        <div class="compare-table-wrap">
+          <table class="compare-table" id="compare-table">
+            <!-- filled by JS -->
+          </table>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="results-cta">
+        <a href="/" class="btn-primary">Try a different environment →</a>
+      </div>
+
+    </div>
+  </main>
+
+<script src="{{ url_for('static', filename='results.js') }}"></script>
+</body>
+</html>

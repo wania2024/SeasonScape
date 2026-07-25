@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SeasonScape — Find Your Perfect Environment</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- BACKGROUND SCENE -->
+  <div class="bg-scene">
+    <div class="bg-layer mountains"></div>
+    <div class="bg-layer sky-overlay"></div>
+    <div class="particles" id="particles"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">SeasonScape</span>
+    </div>
+    <p class="logo-tagline">Design your ideal environment</p>
+  </header>
+
+  <!-- MAIN FORM -->
+  <main class="form-container">
+
+    <!-- STEP 0: Greeting -->
+    <section class="step active" id="step-0">
+      <div class="step-card intro-card">
+        <div class="intro-icon">🌍</div>
+        <h1 class="intro-title">Find Your Perfect Place</h1>
+        <p class="intro-sub">Tell us what kind of environment you're dreaming of, and we'll match you with the best real places in Pakistan — powered by AI.</p>
+        <div class="input-group">
+          <label>What's your name?</label>
+          <input type="text" id="user-name" placeholder="e.g. Ahmed" maxlength="30"/>
+        </div>
+        <button class="btn-primary" onclick="nextStep(1)">Let's Begin →</button>
+      </div>
+    </section>
+
+    <!-- STEP 1: Mood -->
+    <section class="step" id="step-1">
+      <div class="step-card">
+        <div class="step-num">1 of 4</div>
+        <h2 class="step-title">What's your mood today?</h2>
+        <p class="step-sub">Pick the vibe that matches how you're feeling</p>
+        <div class="options-grid" id="mood-grid">
+          <div class="option-card" data-value="relax" onclick="select(this,'mood')">
+            <span class="opt-icon">🌿</span>
+            <span class="opt-label">Relax</span>
+            <span class="opt-desc">Calm & peaceful</span>
+          </div>
+          <div class="option-card" data-value="explore" onclick="select(this,'mood')">
+            <span class="opt-icon">🧭</span>
+            <span class="opt-label">Explore</span>
+            <span class="opt-desc">Adventurous & curious</span>
+          </div>
+          <div class="option-card" data-value="social" onclick="select(this,'mood')">
+            <span class="opt-icon">🎉</span>
+            <span class="opt-label">Social</span>
+            <span class="opt-desc">Fun with others</span>
+          </div>
+          <div class="option-card" data-value="focus" onclick="select(this,'mood')">
+            <span class="opt-icon">🎯</span>
+            <span class="opt-label">Focus</span>
+            <span class="opt-desc">Work or study</span>
+          </div>
+          <div class="option-card" data-value="adventure" onclick="select(this,'mood')">
+            <span class="opt-icon">⛰️</span>
+            <span class="opt-label">Adventure</span>
+            <span class="opt-desc">Thrill & excitement</span>
+          </div>
+          <div class="option-card" data-value="family" onclick="select(this,'mood')">
+            <span class="opt-icon">👨‍👩‍👧</span>
+            <span class="opt-label">Family</span>
+            <span class="opt-desc">Fun for everyone</span>
+          </div>
+          <div class="option-card" data-value="solo" onclick="select(this,'mood')">
+            <span class="opt-icon">🌙</span>
+            <span class="opt-label">Solo</span>
+            <span class="opt-desc">Me time</span>
+          </div>
+          <div class="option-card" data-value="creative" onclick="select(this,'mood')">
+            <span class="opt-icon">🎨</span>
+            <span class="opt-label">Creative</span>
+            <span class="opt-desc">Inspired & artistic</span>
+          </div>
+
+          <div class="option-card" data-value="luxury" onclick="select(this,'mood')">
+            <span class="opt-icon">✨</span>
+            <span class="opt-label">Luxury</span>
+            <span class="opt-desc">Premium experience</span>
+          </div>
+
+          <div class="option-card" data-value="nature" onclick="select(this,'mood')">
+            <span class="opt-icon">🍃</span>
+            <span class="opt-label">Nature</span>
+            <span class="opt-desc">Fresh & outdoorsy</span>
+          </div>
+
+          <div class="option-card" data-value="photography" onclick="select(this,'mood')">
+            <span class="opt-icon">📸</span>
+            <span class="opt-label">Photography</span>
+            <span class="opt-desc">Scenic & picture-perfect</span>
+          </div>
+
+          <div class="option-card" data-value="foodie" onclick="select(this,'mood')">
+  <span class="opt-icon">🍜</span>
+  <span class="opt-label">Foodie</span>
+  <span class="opt-desc">Great food & cafes</span>
+          </div>
+
+          <div class="option-card" data-value="wellness" onclick="select(this,'mood')">
+            <span class="opt-icon">🧘</span>
+            <span class="opt-label">Wellness</span>
+            <span class="opt-desc">Mental peace & healing</span>
+          </div>
+          </div>
+        <div class="step-nav">
+          <button class="btn-secondary" onclick="nextStep(0)">← Back</button>
+          <button class="btn-primary" onclick="nextStep(2)" id="next-1" disabled>Next →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: Environment Type -->
+    <section class="step" id="step-2">
+      <div class="step-card">
+        <div class="step-num">2 of 4</div>
+        <h2 class="step-title">Where do you want to go?</h2>
+        <p class="step-sub">Choose your ideal environment type</p>
+        <div class="options-grid four-col">
+          <div class="option-card big-card" data-value="mountain" onclick="select(this,'location_type')">
+            <span class="opt-icon">🏔️</span>
+            <span class="opt-label">Mountain</span>
+            <span class="opt-desc">Hills, peaks, forests</span>
+          </div>
+          <div class="option-card big-card" data-value="beach" onclick="select(this,'location_type')">
+            <span class="opt-icon">🏖️</span>
+            <span class="opt-label">Beach</span>
+            <span class="opt-desc">Sand, sea, waves</span>
+          </div>
+          <div class="option-card big-card" data-value="park" onclick="select(this,'location_type')">
+            <span class="opt-icon">🌳</span>
+            <span class="opt-label">Park / Lake</span>
+            <span class="opt-desc">Green, open, calm</span>
+          </div>
+          <div class="option-card big-card" data-value="indoor" onclick="select(this,'location_type')">
+            <span class="opt-icon">☕</span>
+            <span class="opt-label">Indoor / Café</span>
+            <span class="opt-desc">Cozy, sheltered</span>
+          </div>
+        </div>
+        <div class="step-nav">
+          <button class="btn-secondary" onclick="nextStep(1)">← Back</button>
+          <button class="btn-primary" onclick="nextStep(3)" id="next-2" disabled>Next →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: Atmosphere -->
+    <section class="step" id="step-3">
+      <div class="step-card">
+        <div class="step-num">3 of 4</div>
+        <h2 class="step-title">Set your atmosphere</h2>
+        <p class="step-sub">Fine-tune the sensory experience you want</p>
+
+        <div class="sliders-section">
+
+          <div class="slider-row">
+            <div class="slider-label">
+              <span class="slider-icon">🌡️</span>
+              <span>Temperature</span>
+            </div>
+            <div class="slider-options" id="temp-options">
+              <button class="slider-opt" data-field="temperature" data-value="cool" onclick="selectSlider(this)">❄️ Cool</button>
+              <button class="slider-opt" data-field="temperature" data-value="mild" onclick="selectSlider(this)">🌤️ Mild</button>
+              <button class="slider-opt" data-field="temperature" data-value="warm" onclick="selectSlider(this)">☀️ Warm</button>
+            </div>
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-label">
+              <span class="slider-icon">👥</span>
+              <span>Crowd Level</span>
+            </div>
+            <div class="slider-options" id="crowd-options">
+              <button class="slider-opt" data-field="crowd" data-value="low" onclick="selectSlider(this)">🤫 Solo/Quiet</button>
+              <button class="slider-opt" data-field="crowd" data-value="medium" onclick="selectSlider(this)">🙂 Some people</button>
+              <button class="slider-opt" data-field="crowd" data-value="high" onclick="selectSlider(this)">🎊 Lively crowd</button>
+            </div>
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-label">
+              <span class="slider-icon">💰</span>
+              <span>Budget</span>
+            </div>
+            <div class="slider-options" id="budget-options">
+              <button class="slider-opt" data-field="budget" data-value="low" onclick="selectSlider(this)">💚 Budget-friendly</button>
+              <button class="slider-opt" data-field="budget" data-value="medium" onclick="selectSlider(this)">💛 Mid-range</button>
+              <button class="slider-opt" data-field="budget" data-value="high" onclick="selectSlider(this)">💎 Premium</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-secondary" onclick="nextStep(2)">← Back</button>
+          <button class="btn-primary" onclick="nextStep(4)" id="next-3" disabled>Next →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4: Review & Submit -->
+    <section class="step" id="step-4">
+      <div class="step-card">
+        <div class="step-num">4 of 4</div>
+        <h2 class="step-title">Your Environment Profile</h2>
+        <p class="step-sub">Here's what you're looking for — ready to find your match?</p>
+
+        <div class="profile-summary" id="profile-summary">
+          <!-- filled by JS -->
+        </div>
+
+        <button class="btn-primary btn-find" onclick="findMatches()">
+          <span id="btn-find-text">✦ Find My Perfect Place</span>
+          <div class="btn-loader" id="btn-loader" style="display:none"></div>
+        </button>
+
+        <div class="step-nav" style="justify-content:center; margin-top:12px;">
+          <button class="btn-secondary" onclick="nextStep(3)">← Go Back & Edit</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
