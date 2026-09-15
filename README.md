@@ -39,8 +39,8 @@ budget, temperature preference, crowd level, and environment type — powered by
 ---
 
 ## 👥 Team
-- Wania Abdul Basit
-- Abeesha Amin  
+- [Wania Abdul Basit](https://github.com/wania2024)
+- [Abeesha Amin](https://github.com/abeesha-amin)  
 - Amna Abbas
 
 National Textile University — Introduction to AI Course Project (2026)
